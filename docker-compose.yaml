@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  frontend:
+    build:
+      context: ./frontend/qwizzle
+      dockerfile: Dockerfile
+    ports:
+      - "3000:80"
+    environment:
+      - VITE_API_URL=http://backend:8080 
+    depends_on:
+      - backend
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+      - DB_HOST=host
+      - DB_PORT=port
+      - DB_USER=user
+      - DB_PASSWORD=password
+      - DB_NAME=name
+      - PORT=port
